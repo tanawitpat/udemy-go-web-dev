@@ -8,10 +8,21 @@
 
 {{range .}}
     {{.Name}}
-    {{range .Menus}}
-        Name: {{.Name}}
-        Price: {{.Price}}
-    {{end}}
+        Breakfast
+        {{range .Menus.Breakfast}}
+            Name: {{.Name}}
+            Price: {{.Price}}
+        {{end}}
+        Lunch
+        {{range .Menus.Lunch}}
+            Name: {{.Name}}
+            Price: {{.Price}}
+        {{end}}
+        Dinner
+        {{range .Menus.Dinner}}
+            Name: {{.Name}}
+            Price: {{.Price}}
+        {{end}}
 {{end}}
 
 </body>

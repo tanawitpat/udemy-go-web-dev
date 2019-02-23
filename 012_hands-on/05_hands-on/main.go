@@ -8,12 +8,15 @@ import (
 
 type Restaurant struct {
 	Name  string
-	Menus []Menu
+	Menus MenuCategory
 }
 type Menu struct {
-	Name     string
-	Price    float64
-	Category string
+	Name  string
+	Price float64
+}
+
+type MenuCategory struct {
+	Breakfast, Lunch, Dinner []Menu
 }
 
 var tpl *template.Template
@@ -26,31 +29,59 @@ func main() {
 	restaurants := []Restaurant{
 		Restaurant{
 			Name: "Hong Kong House",
-			Menus: []Menu{
-				{
-					Name:     "เป็ดทรงเครื่อง",
-					Price:    500,
-					Category: "Breakfast",
+			Menus: MenuCategory{
+				Breakfast: []Menu{
+					{
+						Name:  "ปลากระพงทอดน้ำปลา",
+						Price: 390,
+					},
+					{
+						Name:  "ผัดคะน้า",
+						Price: 200,
+					},
+					{
+						Name:  "เป็ดย่าง",
+						Price: 600,
+					},
 				},
-				{
-					Name:     "ปลากระพงทอดน้ำปลา",
-					Price:    390,
-					Category: "Lunch",
+				Lunch: []Menu{
+					{
+						Name:  "ปูผัดผงกะหรี่",
+						Price: 400,
+					},
+				},
+				Dinner: []Menu{
+					{
+						Name:  "ขนมจีบหมู",
+						Price: 100,
+					},
 				},
 			},
 		},
 		Restaurant{
 			Name: "Hua Seng Hong",
-			Menus: []Menu{
-				{
-					Name:     "ผัดคะน้า",
-					Price:    200,
-					Category: "Breakfast",
+			Menus: MenuCategory{
+				Breakfast: []Menu{
+					{
+						Name:  "ไข่เจียวหอยนางรม",
+						Price: 100,
+					},
+					{
+						Name:  "ออส่วน",
+						Price: 120,
+					},
 				},
-				{
-					Name:     "เป็ดย่าง",
-					Price:    600,
-					Category: "Dinner",
+				Lunch: []Menu{
+					{
+						Name:  "กุ้งแม่น้ำ",
+						Price: 300,
+					},
+				},
+				Dinner: []Menu{
+					{
+						Name:  "กุ้งแช่น้ำปลา",
+						Price: 200,
+					},
 				},
 			},
 		},
