@@ -15,13 +15,7 @@ func main() {
 
 func set(w http.ResponseWriter, req *http.Request) {
 	c, err := req.Cookie("visit-counter")
-	if err != nil {
-		http.SetCookie(w, &http.Cookie{
-			Name:  "visit-counter",
-			Value: "0",
-			Path:  "/",
-		})
-	} else {
+	if err == nil {
 		counter, _ := strconv.Atoi(c.Value)
 		counter = counter + 1
 		http.SetCookie(w, &http.Cookie{
@@ -29,6 +23,14 @@ func set(w http.ResponseWriter, req *http.Request) {
 			Value: strconv.Itoa(counter),
 			Path:  "/",
 		})
+	} else if err == http.ErrNoCookie {
+		http.SetCookie(w, &http.Cookie{
+			Name:  "visit-counter",
+			Value: "0",
+			Path:  "/",
+		})
+	} else {
+		fmt.Println(err)
 	}
 	fmt.Fprintln(w, "COOKIE WRITTEN - CHECK YOUR BROWSER")
 	fmt.Fprintln(w, "in chrome go to: dev tools / application / cookies")
